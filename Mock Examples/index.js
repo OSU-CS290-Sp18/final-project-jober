@@ -16,7 +16,7 @@ function closeForm(event){
     addJobStub.classList.remove('hidden');
   }
 }
-
+/*
 var textareas = document.getElementsByTagName("textarea");
 for (var i = 0; i < textareas.length; i++){
   textareas[i].addEventListener('keyup',textAreaAdjust);
@@ -27,3 +27,4 @@ function textAreaAdjust(event) {
   event.style.height = "1px";
   event.style.height = (-10+event.scrollHeight)+"px";
 }
+*/
