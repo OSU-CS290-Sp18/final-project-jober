@@ -159,22 +159,26 @@ a:focus {
   border-bottom: 2px solid #555;
 }
 .comment-header {
+  margin-top: 8px;
+  margin-bottom: 8px;
   display:flex;
   flex-direction: row;
   flex-wrap: nowrap;
 }
 .comment-author {
   flex: 1 1 auto;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin: 0px;
   font-weight: bold;
 }
 .comment-timestamp {
   flex: 0 1 content;
+  margin: 0px;
+  font-size: 12px;
   float: right;
 }
 .comment-text {
   margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .create-response {
