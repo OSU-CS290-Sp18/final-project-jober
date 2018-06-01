@@ -210,6 +210,7 @@ a:focus {
   height: 10px;
   min-height: 30px;
   overflow: hidden;
+  font-family: Roboto, Helvetica, sans-serif;
 }
 
 #create-response-input:focus {
