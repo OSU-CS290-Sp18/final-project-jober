@@ -4,7 +4,7 @@
 
 ### Ubuntu (untested)
 
-`sudo apt install mongodb-server`
+`sudo apt-get install mongodb-server`
 `git clone https://github.com/OSU-CS290-Sp18/final-project-jober.git`
 
 ### Arch / Manjaro (untested)
