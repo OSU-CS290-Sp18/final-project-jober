@@ -18,9 +18,12 @@ function closeForm(event){
 }
 
 var textareas = document.getElementsByTagName("textarea");
-textareas.addEventListener('ononkeyup',textAreaAdjust);
-
+for (var i = 0; i < textareas.length; i++){
+  textareas[i].addEventListener('keyup',textAreaAdjust);
+  console.log(textareas[i].placeholder);
+}
 function textAreaAdjust(event) {
+  console.log(1);
   event.style.height = "1px";
   event.style.height = (-10+event.scrollHeight)+"px";
 }
