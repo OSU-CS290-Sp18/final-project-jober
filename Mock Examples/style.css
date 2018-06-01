@@ -188,18 +188,25 @@ a:focus {
 }
 
 .create-response {
-  padding: 5px 10px 10px 10px;
+  padding: 0px 5px 0px 10px;
   display: flex;
+  background-color: #eee;
   flex-direction: row;
+  border: 0px solid #dadada;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 #create-response-input {
   flex: 1 1 auto;
   padding: 4px;
   font-size: 16px;
   background-color: #eee;
-  border: 1px solid #dadada;
-  border-radius: 2px;
+  border: 0px solid #dadada;
+  border-radius: 10px;
   width:92.5%;
+  height: 10px;
+  min-height: 30px;
+  overflow: hidden;
 }
 
 #create-response-input:focus {
@@ -214,6 +221,8 @@ a:focus {
   background: none;
   border: none;
   color: #343434;
+  border: 0px solid #dadada;
+  border-radius: 10px;
   cursor: pointer;
 }
 
