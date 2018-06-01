@@ -17,3 +17,10 @@ function closeForm(event){
   }
 }
 
+var textareas = document.getElementsByTagName("textarea");
+textareas.addEventListener('ononkeyup',textAreaAdjust);
+
+function textAreaAdjust(event) {
+  event.style.height = "1px";
+  event.style.height = (-10+event.scrollHeight)+"px";
+}

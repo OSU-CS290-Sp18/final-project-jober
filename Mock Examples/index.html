@@ -13,13 +13,6 @@
     <!-- This script incorporates SVG icons from Font Awesome: http://fontawesome.com/ -->
     <script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" defer></script>
 
-
-    <script charset="utf-8" defer>
-      function textAreaAdjust(o) {
-        o.style.height = "1px";
-        o.style.height = (-10+o.scrollHeight)+"px";
-      }
-    </script>
     <script src="./index.js" charset="utf-8" defer></script>
   </head>
 
@@ -112,7 +105,7 @@
             </p>
           </div>
           <div class="create-response">
-            <textarea type="text" class="create-response-input" placeholder="reply here..." maxlength="400" ononkeyup="textAreaAdjust(this)"></textarea>
+            <textarea type="text" class="create-response-input" placeholder="reply here..." maxlength="400"></textarea>
             <button type="button" class="create-response-button action-button"><i class="fas fa-arrow-right"></i></button>
           </div>
         </div>
