@@ -3,7 +3,7 @@
   <head>
 
     <meta charset="utf-8">
-    <title>Tweeter</title>
+    <title>jöber</title>
 
     <!-- This is a stylesheet that includes the font you should use: Roboto -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700" rel="stylesheet">
@@ -15,36 +15,69 @@
 
     <script src="/index.js" charset="utf-8" defer></script>
 
+    <script charset="utf-8" defer>
+      function textAreaAdjust(o) {
+        o.style.height = "1px";
+        o.style.height = (-10+o.scrollHeight)+"px";
+      }
+    </script>
   </head>
 
   <body>
 
     <header>
-      <!-- The <i> tag below includes the lizzard hand icon from Font Awesome -->
-      <a href="#"><h1 class="site-title"><i class="fas fa-gavel"></i>  jober</h1></a>
+      <!-- The <i> tag below includes the gavel icon from Font Awesome -->
+      <a href="#"><h1 class="site-title"><i class="fas fa-gavel"></i>  jöber</h1></a>
 
       <nav class="navbar">
         <ul class="navlist">
           <li class="navitem navlink active"><a href="#">Home</a></li>
-          <li class="navitem navlink"><a href="#">Trending</a></li>
-          <li class="navitem navlink"><a href="#">People</a></li>
+          <li class="navitem navlink"><a href="#">Post a Job</a></li>
+          <li class="navitem navlink"><a href="#">My Profile</a></li>
           <li class="navitem navbar-search">
-            <input type="text" id="navbar-search-input" placeholder="Search...">
-            <button type="button" id="navbar-search-button"><i class="fas fa-search"></i></button>
+            <input type="text" class="navbar-search-input" placeholder="Search...">
+            <button type="button" class="navbar-search-button action-button"><i class="fas fa-search"></i></button>
           </li>
         </ul>
       </nav>
     </header>
 
     <main class="post-container">
+      <article class="post add-post-stub">
+        <a href="#">
+          <div class="post-header">
+            <h2 class="post-title">Add a Job</h2>
+            <button type="button" class="add-job-button action-button"><i class="fas fa-arrow-right"></i></button>
+          </div>
+        </a>
+      </article>
+      <article class="post add-post">
+        <a href="#">
+          <div class="post-header">
+            <h2 class="post-title">Add a Job</h2>
+            <button type="button" class="add-job-button action-button"><i class="fas fa-arrow-right"></i></button>
+          </div>
+        </a>
+        <div class="add-post post-header">
+          <input type="text" class="add-post post-title" placeholder="Post title">
+          <input type="text" class="add-post post-price" placeholder="Price">
+        </div>
+        <div class="add-post post-content">
+          <textarea type="text" class="add-post post-description" rows="4" placeholder="Job Description"></textarea>
+          <input type="text" class="add-post post-author" placeholder="Name">
+        </div>
+        <div class="add-post-footer">
+          <button type="button" class="action-button submit-post">SUBMIT <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </article>
 
       <article class="post">
         <div class="post-header">
           <h2 class="post-title">Paint my Fence!</h2>
-          <p class="post-timestamp">May 29 8:17</p>
           <p class="post-price">$30-$300</p>
         </div>
         <div class="post-content">
+          <p class="post-timestamp">May 29 08:17</p>
           <p class="post-description">
             I would like you to paint my back and side fence the color red. You bring the tools, I'll supply the paint.
           </p>
@@ -54,22 +87,35 @@
         </div>
         <div class="post-responses">
           <div class="comment">
-            <p class="comment-author"><a href="#">Jim Bob</a></p>
-            <p class="comment-timestamp">May 31 21:09</p>
+            <div class="comment-header">
+              <p class="comment-author"><a href="#">Jim Bob</a></p>
+              <p class="comment-timestamp">May 31 21:09</p>
+            </div>
             <p class="comment-text">
               I am a professional fence painter. I can do this job for $250.
             </p>
           </div>
           <div class="comment">
-            <p class="comment-author"><a href="#">Bo Dean</a></p>
-            <p class="comment-timestamp">May 31 22:50</p>
+            <div class="comment-header">
+              <p class="comment-author"><a href="#">Bo Dean</a></p>
+              <p class="comment-timestamp">May 31 22:50</p>
+            </div>
             <p class="comment-text">
-              I am a not professional fence painter, but I will paint your fence for $100.
+              I am not a professional fence painter, but I will paint your fence for $100.
+            </p>
+          </div>
+          <div class="comment">
+            <div class="comment-header">
+              <p class="comment-author"><a href="#">Tim Redwood</a></p>
+              <p class="comment-timestamp">June 1 02:46</p>
+            </div>
+            <p class="comment-text">
+              I am a college kid. I'll do it for $35.
             </p>
           </div>
           <div class="create-response">
-            <input type="text" id="create-response-input" placeholder="reply here...">
-            <button type="button" id="create-response-button"><i class="fas fa-arrow-right"></i></button>
+            <textarea type="text" class="create-response-input" placeholder="reply here..." maxlength="400" ononkeyup="textAreaAdjust(this)"></textarea>
+            <button type="button" class="create-response-button action-button"><i class="fas fa-arrow-right"></i></button>
           </div>
         </div>
       </article>
