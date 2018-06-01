@@ -35,14 +35,32 @@
           <li class="navitem navlink"><a href="#">Post a Job</a></li>
           <li class="navitem navlink"><a href="#">My Profile</a></li>
           <li class="navitem navbar-search">
-            <input type="text" id="navbar-search-input" placeholder="Search...">
-            <button type="button" id="navbar-search-button"><i class="fas fa-search"></i></button>
+            <input type="text" class="navbar-search-input" placeholder="Search...">
+            <button type="button" class="navbar-search-button action-button"><i class="fas fa-search"></i></button>
           </li>
         </ul>
       </nav>
     </header>
 
     <main class="post-container">
+
+      <article class="post add-job">
+        <div class="post-header">
+          <h2 class="post-title"><a href="#">Add a Job</a></h2>
+          <button type="button" class="add-job-button action-button"><i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div class="post-header">
+          <input type="text" class="add-post post-title" placeholder="Post title">
+          <input type="text" class="add-post post-price" placeholder="Price">
+        </div>
+        <div class="add-post post-content">
+          <textarea type="text" class="add-post post-description" rows="4" placeholder="Job Description"></textarea>
+          <input type="text" class="add-post post-author" placeholder="Name">
+        </div>
+        <div class="add-post-footer">
+          <button type="button" class="action-button submit-post">SUBMIT <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </article>
 
       <article class="post">
         <div class="post-header">
@@ -87,8 +105,8 @@
             </p>
           </div>
           <div class="create-response">
-            <textarea type="text" id="create-response-input" placeholder="reply here..." maxlength="400" ononkeyup="textAreaAdjust(this)"></textarea>
-            <button type="button" id="create-response-button"><i class="fas fa-arrow-right"></i></button>
+            <textarea type="text" class="create-response-input" placeholder="reply here..." maxlength="400" ononkeyup="textAreaAdjust(this)"></textarea>
+            <button type="button" class="create-response-button action-button"><i class="fas fa-arrow-right"></i></button>
           </div>
         </div>
       </article>
