@@ -144,6 +144,12 @@ a:focus {
   margin: 0;
 }
 
+.post-content .post-timestamp {
+  margin-bottom: 5px;
+  font-size: 12px;
+  text-align: right;
+}
+
 .post-content .post-author {
   margin-top: 8px;
   text-align: right;
