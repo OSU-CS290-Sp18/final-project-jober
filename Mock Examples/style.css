@@ -162,9 +162,14 @@ a:focus {
   flex-wrap: nowrap;
 }
 .comment-author {
+  flex: 1 1 auto;
   margin-top: 8px;
   margin-bottom: 8px;
   font-weight: bold;
+}
+.comment-timestamp {
+  flex: 0 1 content;
+  float: right;
 }
 .comment-text {
   margin-top: 8px;
