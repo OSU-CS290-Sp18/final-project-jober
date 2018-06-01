@@ -15,6 +15,12 @@
 
     <script src="/index.js" charset="utf-8" defer></script>
 
+    <script charset="utf-8" defer>
+      function textAreaAdjust(o) {
+        o.style.height = "1px";
+        o.style.height = (-10+o.scrollHeight)+"px";
+      }
+    </script>
   </head>
 
   <body>
@@ -81,7 +87,7 @@
             </p>
           </div>
           <div class="create-response">
-            <input type="text" id="create-response-input" placeholder="reply here...">
+            <textarea type="text" id="create-response-input" placeholder="reply here..." maxlength="400" ononkeyup="textAreaAdjust(this)"></textarea>
             <button type="button" id="create-response-button"><i class="fas fa-arrow-right"></i></button>
           </div>
         </div>
