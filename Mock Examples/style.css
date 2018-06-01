@@ -133,7 +133,7 @@ a:focus {
   margin:0px;
   color: #ffffff;
   font-size:20px;
-  font-weight:700;
+  font-weight: bold;
   max-height: 25px;
 }
 
@@ -153,7 +153,7 @@ a:focus {
 }
 
 .post-content .post-author {
-  margin-top: 8px;
+  margin-top: 3px;
   text-align: right;
   font-weight: bold;
 }
