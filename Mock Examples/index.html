@@ -13,14 +13,7 @@
     <!-- This script incorporates SVG icons from Font Awesome: http://fontawesome.com/ -->
     <script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" defer></script>
 
-    <script src="/index.js" charset="utf-8" defer></script>
-
-    <script charset="utf-8" defer>
-      function textAreaAdjust(o) {
-        o.style.height = "1px";
-        o.style.height = (-10+o.scrollHeight)+"px";
-      }
-    </script>
+    <script src="./index.js" charset="utf-8" defer></script>
   </head>
 
   <body>
@@ -43,21 +36,19 @@
     </header>
 
     <main class="post-container">
-      <article class="post add-post-stub">
-        <a href="#">
+      <article id="add-post-stub" class="post add-post-stub">
+        <a href="#add-post-form">
           <div class="post-header">
             <h2 class="post-title">Add a Job</h2>
-            <button type="button" class="add-job-button action-button"><i class="fas fa-arrow-right"></i></button>
+            <button type="button" class="add-post-button action-button"><i class="fas fa-arrow-right"></i></button>
           </div>
         </a>
       </article>
-      <article class="post add-post">
-        <a href="#">
-          <div class="post-header">
-            <h2 class="post-title">Add a Job</h2>
-            <button type="button" class="add-job-button action-button"><i class="fas fa-arrow-right"></i></button>
-          </div>
-        </a>
+      <article id="add-post-form" class="post add-post hidden">
+        <div class="post-header">
+          <h2 class="post-title">Add a Job</h2>
+          <button type="button" id="add-post-close-button" class="add-post-close-button action-button"><i class="fas fa-times"></i></button>
+        </div>
         <div class="add-post post-header">
           <input type="text" class="add-post post-title" placeholder="Post title">
           <input type="text" class="add-post post-price" placeholder="Price">
@@ -114,7 +105,7 @@
             </p>
           </div>
           <div class="create-response">
-            <textarea type="text" class="create-response-input" placeholder="reply here..." maxlength="400" ononkeyup="textAreaAdjust(this)"></textarea>
+            <textarea type="text" class="create-response-input" placeholder="reply here..." maxlength="400"></textarea>
             <button type="button" class="create-response-button action-button"><i class="fas fa-arrow-right"></i></button>
           </div>
         </div>
