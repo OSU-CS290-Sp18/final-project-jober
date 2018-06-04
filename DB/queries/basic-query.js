@@ -21,5 +21,7 @@ var query = function(propVal, propType, collection) {
     });
   })
 }
-
-query("jimmey coolio", "name", "employer");//.then(result => console.log(result));
+getCollections.collect.then((collections) => {
+  console.log(collections);
+});
+// query("jimmey coolio", "name", "employer");//.then(result => console.log(result));

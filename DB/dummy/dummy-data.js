@@ -14,11 +14,11 @@ var contractor = {
 // fs.writeFile('./dummy/dummy-contractor.json', contractor, 'utf8', written);
 
 var employer = {
-  name: "jimmey coolio",
+  name: "jimmey cool",
   jobs: []
 };
 // employer = JSON.stringify(employer);
-// fs.writeFile('./dummy/dummy-employer.json', contractor, 'utf8', written);
+// fs.writeFile('./dummy/dummy-employer.json', employer, 'utf8', written);
 
 var job = {
   author_id: "",

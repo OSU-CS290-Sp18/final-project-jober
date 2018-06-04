@@ -1,7 +1,8 @@
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectId;
 var url = "mongodb://localhost:27017/";
-var dummy = require('./dummy/dummy-data')
+var DB = require('./DB-interface');
+var dummy = require('./dummy/dummy-data');
 
 MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
   if (err) throw err;
@@ -21,7 +22,7 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
     console.log("1 job created");
     db.close();
   });
-  jober.collection("employer").insertOne(dummy.employer, function(err, res) {
+  jober.collection("employers").insertOne(dummy.employer, function(err, res) {
     if (err) throw err;
     console.log("1 employer created");
     db.close();
