@@ -27,7 +27,7 @@ job = JSON.stringify(job);
 fs.writeFile('dummy-job.json', job, 'utf8', written);
 
 var comment = {
-  author_id: "0001",
+  author_id: "",
   author_name: "Mike L",
   timestamp: "May 25 2018 - 1:11am",
   text: "Ay howabout 60, seasoned dirtbag here"
