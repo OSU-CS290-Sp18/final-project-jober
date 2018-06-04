@@ -10,8 +10,15 @@ var contractor = {
   jobs: [],
   rating: 0
 };
-contractor = JSON.stringify(contractor);
-fs.writeFile('dummy-contractor.json', contractor, 'utf8', written);
+// contractor = JSON.stringify(contractor);
+// fs.writeFile('./dummy/dummy-contractor.json', contractor, 'utf8', written);
+
+var employer = {
+  name: "jimmey coolio",
+  jobs: []
+};
+// employer = JSON.stringify(employer);
+// fs.writeFile('./dummy/dummy-employer.json', contractor, 'utf8', written);
 
 var job = {
   author_id: "",
@@ -23,8 +30,8 @@ var job = {
   skills: ["fencing", "thieving", "thugging"],
   comments: [] //fill with comment id's
 };
-job = JSON.stringify(job);
-fs.writeFile('dummy-job.json', job, 'utf8', written);
+// job = JSON.stringify(job);
+// fs.writeFile('./dummy/dummy-job.json', job, 'utf8', written);
 
 var comment = {
   author_id: "",
@@ -32,5 +39,12 @@ var comment = {
   timestamp: "May 25 2018 - 1:11am",
   text: "Ay howabout 60, seasoned dirtbag here"
 };
-comment = JSON.stringify(comment);
-fs.writeFile('dummy-comment.json', comment, 'utf8', written);
+// comment = JSON.stringify(comment);
+// fs.writeFile('./dummy/dummy-comment.json', comment, 'utf8', written);
+
+module.exports = {
+  contractor: contractor,
+  employer: employer,
+  job: job,
+  comment: comment
+}
