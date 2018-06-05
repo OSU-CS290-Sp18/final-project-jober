@@ -21,8 +21,8 @@ var employer = {
 // fs.writeFile('./dummy/dummy-employer.json', employer, 'utf8', written);
 
 var job = {
-  author_id: "",
-  author_name: "jimmey cool",
+  author_id: "", //hex _id value
+  name: "jimmey cool",
   title: "Need someone who is okay to perfrom illegal activities",
 	price: "$20-$50",
 	timestamp: "May 25 2018 - 1:02am",
@@ -35,7 +35,7 @@ var job = {
 
 var comment = {
   author_id: "",
-  author_name: "Mike L",
+  name: "Mike L",
   timestamp: "May 25 2018 - 1:11am",
   text: "Ay howabout 60, seasoned dirtbag here"
 };

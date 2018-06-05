@@ -2,42 +2,68 @@ var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectId;
 var url = "mongodb://localhost:27017/";
 var DB = require('./DB-interface');
-// var dummy = require('./dummy/dummy-data');
 
 var resultFields = {
   /* This obj lets you pick which fields ar returned.
    * You cant mix true and false, so either just
    * turn on a few with true, or turn off a few with false
    */
-  // author_id:   false, //true,
-  // author_name: false, //true,
-  // title:          true,
-	// price:       false, //true,
-	// timestamp:   false, //true,
-	description: false, //true,
-  // skills:      false, //true,
-  // comments:    false //fill with comment id's
+   _id: true,
+  // author_id, author_name, title, true, price
+	// timestamp, description, skills, comments
 }
 
 var jobQuery = {
-  // author_name: "jimmey cool"
+  /* This is
+   *
+   */
+  name: "Jimmy Cool"
 };
 
-var collections = ["employers"];
+var collection = "jobs";
 
-DB.search(collections,jobQuery,resultFields)
-  .then((cards) => {
-    console.log(cards);
+var updateObj = {
+  $set: {
+    name: "Joe Cool"
+  }
+};
+
+var record = {
+  author_id: "", //hex _id value
+  name: "Test Dude",
+  title: "activities",
+  price: "100",
+  description: "Do stuff!",
+  skills: ["fencing", "thieving", "thugging"],
+  comments: [] //fill with comment id's
+};
+
+DB.insertNew(collection, record)
+  .then((result) => {
+    console.log(result);
+    console.log('Record created!');
+  }).catch((err) => {
+    console.log(err);
 });
 
-// DB.getByIDList([],'comments').then((contractors) => {
-//   console.log(contractors);
+// DB.update(collection,jobQuery, updateObj )
+//   .then((result) => {
+//     console.log(result.result);
+//     console.log('Record updated!');
+// })
+
+// DB.search(collection,jobQuery,resultFields)
+//   .then((cards) => {
+//     // console.log("cards",cards);
+//     cards = cards.map((card) => {
+//       return card._id;
+//     });
+//     // console.log(cards);
+//     DB.getByIDList(collection,cards).then((cards) => {
+//       console.log(cards);
+//     });
 // });
-//
-// DB.getByIDList([],'employers').then((contractors) => {
-//   console.log(contractors);
-// });
-//
-// DB.getByIDList([],'jobs').then((contractors) => {
+
+// DB.getByIDList('contractors').then((contractors) => {
 //   console.log(contractors);
 // });
