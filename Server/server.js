@@ -11,21 +11,24 @@ var port = process.env.PORT || 3000;
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-app.use(express.static('public'));
+app.use(express.static('Styles'));
 
-
-app.get('/style.css', function (req, res, next) {
-    res.status(200).sendFile(__dirname + '/Styles/style.css');
+app.get('/', function (req,res) {
+  res.status(200).render('homePage', {
+    contracts: contractData
+  });
 });
 
-app.get('/index.js', function (req, res, next) {
-    res.status(200).sendFile(__dirname + '/Styles/index.js');
-});
-
-app.get('/main', function (req, res, next) {
-    res.status(200).render('homePage', {
-        contracts: contractData
-    });
+app.get('/:r', function (req, res) {
+    r = req.params.r;
+    if(r === 'home' || r === 'contracts' || r === 'main'){
+      res.status(200).render('homePage', {
+          contracts: contractData
+      });
+    }
+    else{
+      res.status(404).render('404');
+    }
 });
 
 app.listen(port, function () {
