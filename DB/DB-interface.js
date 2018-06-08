@@ -37,7 +37,7 @@ var getByIDList = function(collection, IDlist=[], fieldsObj={}) {
 function insertNew(collection, record) {
   return new Promise((resolve, reject) => {
     MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
-      if (err) throw err;
+      if (err) reject(err);
       var jober = db.db("jober");
       jober.createCollection(collection, function(err, res) {
         if (err) reject(err);
@@ -48,7 +48,6 @@ function insertNew(collection, record) {
       jober.collection(collection)
         .insertOne(record)
         .then((err, result) => {
-          console.log("*** HERE ***");
           if (err) reject(err);
           db.close();
           resolve(result);
@@ -82,9 +81,10 @@ function update(collection, queryObj, updateObj){
       var jober = db.db("jober");
       jober.collection(collection)
         .updateOne(queryObj,updateObj)
-        .then((result) => {
+        .then((result,err) => {
           db.close();
-          resolve(result);
+          if (err) reject(err)
+          else resolve(result);
       });
     });
   });
