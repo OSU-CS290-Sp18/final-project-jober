@@ -39,6 +39,11 @@ function insertNew(collection, record) {
     MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
       if (err) throw err;
       var jober = db.db("jober");
+      jober.createCollection(collection, function(err, res) {
+        if (err) reject(err);
+        console.log("Collection "+collection+" created!");
+        db.close();
+      });
       record.timestamp = new Date().getTime();
       jober.collection(collection)
         .insertOne(record)
