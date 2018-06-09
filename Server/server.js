@@ -28,6 +28,12 @@ app.get('/index.js', function (req, res, next) {
 });
 
 app.get('/main', function (req, res, next) {
+    console.log(contractData);
+    var jobList = DB.search("jobs");
+    var contractorList = DB.search("contractors");
+    Promise.all([jobList,contractorList]).then((lists) => {
+      console.log(lists);
+    });
     res.status(200).render('homePage', {
         contracts: contractData
     });
