@@ -29,6 +29,14 @@ function packageJobSubmittal() {
 
 function handleModalAcceptClick() {
   var request = new XMLHttpRequest();
+  request.onload = function () {
+      if (request.readyState === request.DONE) {
+          if (request.status === 200) {
+              var postContainer = document.getElementsByClassName('post-container')[0]
+              postContainer.insertAdjacentHTML('beforeend',request.responseText);
+          }
+      }
+  };
   request.open("POST", "/submitJob");
   request.setRequestHeader('Content-Type', 'application/json');
   request.send(packageJobSubmittal());

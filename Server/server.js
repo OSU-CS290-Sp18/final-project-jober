@@ -28,24 +28,43 @@ app.get('/index.js', function (req, res, next) {
 });
 
 app.get('/main', function (req, res, next) {
-    console.log(contractData);
+    // console.log(contractData);
+    // contractData.forEach((contract) => {
+    //   return DB.insertNew("jobs",contract)
+    //   .then((result) => {
+    //     console.log(result);
+    //   });
+    // });
     var jobList = DB.search("jobs");
     var contractorList = DB.search("contractors");
-    Promise.all([jobList,contractorList]).then((lists) => {
+    Promise.all([ jobList, contractorList ])
+    .then((lists) => {
       console.log(lists);
-    });
-    res.status(200).render('homePage', {
-        contracts: contractData
+      res.status(200).render('homePage', {
+          contracts: lists[0],
+          // contractors: lists[1]
+      });
     });
 });
 
-app.post('/submitJob', function(req, res, next) {
-  console.log(req.body);
-  DB.insertNew('jobs', req.body).then((result) => {
-      console.log(result);
-      console.log('Record created!');
-    }).catch((err) => {
-      console.log(err);
+app.post('/submitJob', function(req, res) {
+  DB.search("jobs", req.body).then((result) => {
+    if (result.length == 0) {
+      console.log("Inserting...");
+      DB.insertNew('jobs', req.body)
+        .then((result) => {
+        console.log("Inserted: ",result.ops);
+        return result.ops;
+      }).then((result) => {
+        var context = result[0];
+        context.layout = false;
+        res.status(200).render('partials/contractCard', context);
+      }).catch((err) => {console.log("Error: ",err)});
+    } else {
+      console.log("Error: Duplicate insertion");
+    }
+  }).catch((err) => {
+    console.log("Error: ",err);
   });
 
 });
