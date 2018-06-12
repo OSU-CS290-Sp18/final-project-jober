@@ -8,7 +8,22 @@ body {
 a {
   text-decoration: none;
 }
-
+input {
+  padding: 4px;
+  font-size: 16px;
+  background-color: #eee;
+  border: 1px solid #dadada;
+  border-radius: 2px;
+  font-family: Roboto, Helvetica, sans-serif;
+}
+textarea {
+  padding: 4px;
+  font-size: 16px;
+  background-color: #eee;
+  border: 1px solid #dadada;
+  border-radius: 2px;
+  font-family: Roboto, Helvetica, sans-serif;
+}
 .site-title {
   margin: 0;
   padding: 10px 20px;
@@ -60,14 +75,6 @@ a:focus {
   margin-right: 20px;
   padding: 0;
   line-height: 38px;
-}
-
-.navbar-search-input {
-  padding: 4px;
-  font-size: 16px;
-  background-color: #eee;
-  border: 1px solid #dadada;
-  border-radius: 2px;
 }
 
 .navbar-search-input:focus {
@@ -140,7 +147,28 @@ input.add-post.post-author {
   float: right;
   padding: 10px;
 }
-
+article.signin.post{
+  min-width: 380px;
+}
+.signin-row{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+.sigin-h2 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.signin-field{
+  flex: 1 0 auto;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+#signin-password {
+  margin-left: 14px;
+}
 .post-header {
   padding: 20px 20px 5px 20px;
   display:flex;

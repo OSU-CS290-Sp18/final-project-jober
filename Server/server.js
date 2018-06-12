@@ -21,6 +21,9 @@ app.get('/style.css', function (req, res, next) {
 app.get('/index.js', function (req, res, next) {
     res.status(200).sendFile(__dirname + '/Styles/index.js');
 });
+app.get('/signin', function (req, res, next) {
+    res.status(200).render('signin');
+});
 
 app.get('/main', function (req, res, next) {
     res.status(200).render('homePage', {
