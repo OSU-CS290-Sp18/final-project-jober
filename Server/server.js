@@ -27,7 +27,7 @@ app.get('/index.js', function (req, res, next) {
     res.status(200).sendFile(__dirname + '/Styles/index.js');
 });
 
-app.get('/main', function (req, res, next) {
+app.get('/', function (req, res, next) {
     // console.log(contractData);
     // contractData.forEach((contract) => {
     //   return DB.insertNew("jobs",contract)
@@ -46,6 +46,21 @@ app.get('/main', function (req, res, next) {
       });
     });
 });
+
+app.post('/submitComment', function(req, res) {
+    console.log("Inserting...");
+    DB.insertNew('comments', req.body)
+        .then((result) => {
+          console.log("Inserted: ",result.ops);
+          return result.ops;
+      }).then((result) => {
+          var context = result[0];
+          context.layout = false;
+          res.status(200).render('partials/contractCard', context);
+      }).catch((err) => {
+          console.log("Error: ",err)
+    });
+  });
 
 
 app.get('/users', function (req, res, next) {
