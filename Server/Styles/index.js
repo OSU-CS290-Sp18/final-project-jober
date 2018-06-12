@@ -55,6 +55,32 @@ function closeForm(event){
   }
 }
 
+
+
+
+var cupasswd = document.getElementById('create-user-password');
+var cupasswdconf = document.getElementById('create-user-confpassword');
+
+var cubutton = document.getElementById('create-user-button');
+cubutton.addEventListener('click',createAccount);
+
+function createAccount(event){
+  if (cupasswd == cupasswdconf){
+    //something should be done here to prevent
+    //the user from submitting two different passwords
+  }
+  else{
+    console.log("UNMATCHED PASSWORDS");
+  }
+  var requestBody = JSON.stringify({
+    fname: document.getElementById('create-user-firstname').value,
+    lname: document.getElementById('create-user-lastname').value,
+    email: document.getElementById('create-user-username').value,
+    passwd: cupasswd
+  });
+  return requestBody;
+  handleModalAcceptClick();
+}
 /*
 var textareas = document.getElementsByTagName("textarea");
 for (var i = 0; i < textareas.length; i++){
