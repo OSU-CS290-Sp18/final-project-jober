@@ -16,20 +16,6 @@ function closeForm(event){
     addJobStub.classList.remove('hidden');
   }
 }
-var cufname = document.getElementById('create-user-firstname');
-var culname = document.getElementById('create-user-lastname');
-var cuemail = document.getElementById('create-user-username');
-var cupasswd = document.getElementById('create-user-password');
-var cupasswdconf = document.getElementById('create-user-confpassword');
-
-var cubutton = document.getElementById('create-user-button');
-cubutton.addEventListener('click',createAccount);
-
-function createAccount(event){
-
-}
-
-
 /*
 var textareas = document.getElementsByTagName("textarea");
 for (var i = 0; i < textareas.length; i++){

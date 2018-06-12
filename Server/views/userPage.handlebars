@@ -1,0 +1,17 @@
+<main>
+   <div class="user-container">
+      {{> userCard}}
+   </div>
+   <div class="contracts-container">
+      <p>Active Contracts</p>
+      {{#each activeContracts}}
+         {{> contractCard}}
+      {{/each}}
+   </div>
+   <div class="contracts-container">
+      <p>Past Contracts</p>
+      {{#each pastContracts}}
+         {{> contractCard}}
+      {{/each}}
+   </div>
+</main>
