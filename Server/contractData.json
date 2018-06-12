@@ -1,5 +1,5 @@
-{
-	"0001": {
+[
+	{
 		"title": "Need someone who is okay to perfrom illegal activities",
 		"price": "$20-$50",
 		"timestamp": "May 25 2018 - 1:02am",
@@ -23,7 +23,7 @@
 			}
 		]
 	},
-	"0002": {
+	{
 		"title": "Need someone who is okay to perfrom illegal activities",
 		"price": "$20-$50",
 		"timestamp": "May 25 2018 - 1:02am",
@@ -47,4 +47,4 @@
 			}
 		]
 	}
-}
+]
