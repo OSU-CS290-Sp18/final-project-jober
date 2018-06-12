@@ -66,7 +66,8 @@ cubutton.addEventListener('click',createAccount);
 
 function createAccount(event){
   if (cupasswd == cupasswdconf){
-    
+    //something should be done here to prevent
+    //the user from submitting two different passwords
   }
   else{
     console.log("UNMATCHED PASSWORDS");
