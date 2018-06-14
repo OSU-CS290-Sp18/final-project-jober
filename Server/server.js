@@ -160,17 +160,19 @@ app.post('/sumbitUser', function(req, res) {
 
 app.post('/submitJob', function(req, res) {
   DB.search("jobs", req.body).then((result) => {
+    console.log("Search Finished!");
     if (result.length == 0) {
       console.log("Inserting...");
       DB.insertNew('jobs', req.body)
         .then((result) => {
-        console.log("Inserted: ",result.ops);
-        // addContractToUser(result.ops);
+        console.log("Inserted!");
         return result.ops;
       }).then((result) => {
         var context = result[0];
         context.layout = false;
+        console.log("Sending render...");
         res.status(200).render('partials/contractCard', context);
+        console.log("Render sent!");
       }).catch((err) => { if (err) console.log("Error: ",err)});
     } else {
       console.log("Error: Duplicate insertion");
