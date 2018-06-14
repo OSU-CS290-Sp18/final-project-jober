@@ -89,7 +89,7 @@ function addContractToUser(contract) {
 function getUserContracts(user, type) {
     var contractIDList = null;
     var contractList = [];
-    var jobsList = DB.search('jobs');    
+    var jobsList = DB.search('jobs');
 
     switch(type) {
         case 'active':
@@ -123,9 +123,9 @@ app.get('/user/:userID', function (req, res, next) {
             var userPastContracts = getUserContracts(user, 'past');
             context.layout = false;
             res.status(200).render('userPage', {
-                userCard = user,
-                activeContracts = userActiveContracts,
-                pastContracts = userPastContracts
+                userCard: user,
+                activeContracts: userActiveContracts,
+                pastContracts: userPastContracts
             })
 
         } else {
