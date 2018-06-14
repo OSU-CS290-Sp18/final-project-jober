@@ -174,12 +174,12 @@ app.post('/submitJob', function(req, res) {
         var context = result[0];
         context.layout = false;
         res.status(200).render('partials/contractCard', context);
-      }).catch((err) => {console.log("Error: ",err)});
+      }).catch((err) => { if (err) console.log("Error: ",err)});
     } else {
       console.log("Error: Duplicate insertion");
     }
   }).catch((err) => {
-    console.log("Error: ",err);
+    if (err) console.log("Error: ",err);
   });
 
 });
