@@ -2,27 +2,21 @@
 var path = require('path');
 var express = require('express');
 var exphbs = require('express-handlebars');
+var bodyParser = require('body-parser');
 var DB = require('./../DB/DB-interface');
-
 var contractData = require('./contractData');
 
 var app = express();
 var port = process.env.PORT || 3000;
-
-
-
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 app.use(express.static('public'));
-
-var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 app.get('/style.css', function (req, res, next) {
     res.status(200).sendFile(__dirname + '/Styles/style.css');
 });
-
 app.get('/index.js', function (req, res, next) {
     res.status(200).sendFile(__dirname + '/Styles/index.js');
 });
@@ -47,22 +41,6 @@ app.get('/', function (req, res, next) {
     });
 });
 
-app.post('/submitComment', function(req, res) {
-    console.log("Inserting...");
-    DB.insertNew('comments', req.body)
-        .then((result) => {
-          console.log("Inserted: ",result.ops);
-          return result.ops;
-      }).then((result) => {
-          var context = result[0];
-          context.layout = false;
-          res.status(200).render('partials/contractCard', context);
-      }).catch((err) => {
-          console.log("Error: ",err)
-    });
-  });
-
-
 app.get('/users', function (req, res, next) {
     var userList = DB.search("users");
     Promise.all(userList).then((list) => {
@@ -75,42 +53,6 @@ app.get('/users', function (req, res, next) {
         })
     });
 });
-
-function addContractToUser(contract) {
-    var usersList = DB.search('users');
-    var user = usersList.find({user_ID: contract.author_ID});
-
-    DB.update('users', )
-
-}
-
-
-//Get all the contracts assosied with the user (type of 'active' or 'past')
-function getUserContracts(user, type) {
-    var contractIDList = null;
-    var contractList = [];
-    var jobsList = DB.search('jobs');
-
-    switch(type) {
-        case 'active':
-            contractIDList = user.pastContracts;
-            break;
-
-        case 'past':
-            contractIDList = user.activeContracts;
-            break;
-
-        defalt:
-            return;
-    }
-
-    contractIDList.forEach( contID => {
-        contractList.add( jobsList.find({job_ID: contID}) );
-    });
-
-    return contractList;
-}
-
 
 app.get('/user/:userID', function (req, res, next) {
     var userID = req.params.userID.toLowerCase();
@@ -160,12 +102,11 @@ app.post('/sumbitUser', function(req, res) {
 
 app.post('/submitJob', function(req, res) {
   DB.search("jobs", req.body).then((result) => {
-    console.log("Search Finished!");
     if (result.length == 0) {
-      console.log("Inserting...");
+      console.log("Inserting job...");
       DB.insertNew('jobs', req.body)
         .then((result) => {
-        console.log("Inserted!");
+        console.log("Job inserted!");
         return result.ops;
       }).then((result) => {
         var context = result[0];
@@ -182,6 +123,21 @@ app.post('/submitJob', function(req, res) {
   });
 });
 
+app.post('/submitComment', function(req, res) {
+    console.log("Inserting...");
+    DB.insertNew('comments', req.body)
+        .then((result) => {
+          console.log("Inserted: ",result.ops);
+          return result.ops;
+      }).then((result) => {
+          var context = result[0];
+          context.layout = false;
+          res.status(200).render('partials/commentCard', context);
+      }).catch((err) => {
+          console.log("Error: ",err)
+    });
+  });
+
 app.get('*', function (req, res) {
   res.render('404');
 });
@@ -189,3 +145,37 @@ app.get('*', function (req, res) {
 app.listen(port, function () {
     console.log("== Server listening on port", port);
 })
+
+
+function addContractToUser(contract) {
+    var usersList = DB.search('users');
+    var user = usersList.find({user_ID: contract.author_ID});
+
+    DB.update('users', )
+
+}
+//Get all the contracts assosied with the user (type of 'active' or 'past')
+function getUserContracts(user, type) {
+    var contractIDList = null;
+    var contractList = [];
+    var jobsList = DB.search('jobs');
+
+    switch(type) {
+        case 'active':
+            contractIDList = user.pastContracts;
+            break;
+
+        case 'past':
+            contractIDList = user.activeContracts;
+            break;
+
+        defalt:
+            return;
+    }
+
+    contractIDList.forEach( contID => {
+        contractList.add( jobsList.find({job_ID: contID}) );
+    });
+
+    return contractList;
+}
