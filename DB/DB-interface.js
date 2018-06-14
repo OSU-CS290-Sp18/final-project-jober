@@ -61,6 +61,9 @@ function search(collection, queryObj={}, fieldsObj={}) {
     MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
       if (err) throw err;
       var jober = db.db("jober");
+      if (queryObj.hasOwnProperty("_id")) {
+        queryObj._id = ObjectId(queryObj._id);
+      }
       jober.collection(collection)
         .find(queryObj)
         .project(fieldsObj)
