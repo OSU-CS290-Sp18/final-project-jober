@@ -113,7 +113,6 @@ function getUserContracts(user, type) {
 
 
 app.get('/user/:userID', function (req, res, next) {
-
     var userID = req.params.userID.toLowerCase();
     DB.search('users').then((result) => {
         if(result.length > 0) {
@@ -133,8 +132,6 @@ app.get('/user/:userID', function (req, res, next) {
             res.status(404).render('404Page');
         }
     });
-
-
 });
 
 app.post('/sumbitUser', function(req, res) {
@@ -168,7 +165,7 @@ app.post('/submitJob', function(req, res) {
       DB.insertNew('jobs', req.body)
         .then((result) => {
         console.log("Inserted: ",result.ops);
-        addContractToUser(result.ops);
+        // addContractToUser(result.ops);
         return result.ops;
       }).then((result) => {
         var context = result[0];
@@ -181,7 +178,10 @@ app.post('/submitJob', function(req, res) {
   }).catch((err) => {
     if (err) console.log("Error: ",err);
   });
+});
 
+app.get('*', function (req, res) {
+  res.render('404');
 });
 
 app.listen(port, function () {
