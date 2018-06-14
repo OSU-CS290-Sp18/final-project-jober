@@ -23,6 +23,7 @@ var getByIDList = function(collection, IDlist=[], fieldsObj={}) {
         var jober = db.db("jober");
         jober.collection(collection)
           .find(query)
+          .sort({'_id': -1})
           .project(fieldsObj)
           .toArray((err, result) => {
             if (err) throw err;
@@ -63,6 +64,7 @@ function search(collection, queryObj={}, fieldsObj={}) {
       }
       jober.collection(collection)
         .find(queryObj)
+        .sort({'_id': -1})
         .project(fieldsObj)
         .toArray((err, result) => {
           db.close();
