@@ -94,18 +94,17 @@ function update(collection, queryObj, updateObj){
   });
 }
 
-function removeByID(collection, deleteMe}) {
+function removeByID(collection, deleteMe) {
   return new Promise((resolve, reject) => {
     MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
       if (err) throw err;
       var jober = db.db("jober");
       jober.collection(collection)
-        .remove(deleteMe)
+        .remove({ _id: ObjectId(deleteMe) })
         .then((result,err) => {
           db.close();
           if (err) reject(err)
           resolve(result);
-        });
       });
     });
   });
@@ -116,4 +115,5 @@ module.exports = {
   insertNew: insertNew,
   search: search,
   update: update,
+  removeByID: removeByID,
 }
