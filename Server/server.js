@@ -123,9 +123,9 @@ app.post('/submitJob', function(req, res) {
   });
 });
 
-app.post('/removeJob/:jodID', function(req, res) {
+app.post('/removeJob/:jobID', function(req, res) {
   console.log("Inserting job...");
-  DB.insertNew('jobs', req.body)
+  DB.removeByID('jobs', req.body)
     .then((result) => {
     console.log("Job inserted!");
     return result.ops;

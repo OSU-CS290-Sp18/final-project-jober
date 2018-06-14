@@ -94,6 +94,22 @@ function update(collection, queryObj, updateObj){
   });
 }
 
+function removeByID(collection, deleteMe}) {
+  return new Promise((resolve, reject) => {
+    MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
+      if (err) throw err;
+      var jober = db.db("jober");
+      jober.collection(collection)
+        .remove(deleteMe)
+        .then((result,err) => {
+          db.close();
+          if (err) reject(err)
+          resolve(result);
+        });
+      });
+    });
+  });
+}
 
 module.exports = {
   getByIDList: getByIDList,
