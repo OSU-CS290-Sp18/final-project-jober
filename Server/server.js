@@ -66,9 +66,9 @@ app.post('/removeJob/:jobID', function(req, res) {
   }).catch((err) => { if (err) console.log("Error: ",err)});
 });
 
-app.post('/submitComment', function(req, res) {
+app.get('/submitComment', function(req, res) {
     console.log('Received Comment: ', req.body);
-    
+
     console.log("Inserting...");
     DB.insertNew('comments', req.body)
         .then((result) => {
