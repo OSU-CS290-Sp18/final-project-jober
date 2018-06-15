@@ -14,13 +14,6 @@ app.set('view engine', 'handlebars');
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-app.get('/style.css', function (req, res, next) {
-    res.status(200).sendFile(__dirname + '/public/style.css');
-});
-
-app.get('/index.js', function (req, res, next) {
-    res.status(200).sendFile(__dirname + '/public/index.js');
-});
 
 function insertComments(jobCardList) {
   jobCardList.forEach((el) => {
@@ -106,6 +99,7 @@ app.post('/removeJob/:jobID', function(req, res) {
   DB.removeByID('jobs', jobID)
     .then((result) => {
     console.log("Job removed!");
+    res.status(200).send();
   }).catch((err) => { if (err) console.log("Error: ",err)});
 });
 
