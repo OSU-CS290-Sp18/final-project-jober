@@ -54,12 +54,6 @@ app.get('/contract/:j', function (req, res, next) {
   var n = req.params.j;
   console.log(n);
 });
-app.get('/j/style.css', function (req, res, next) {
-    res.status(200).sendFile(__dirname + '/Styles/style.css');
-});
-app.get('/j/index.js', function (req, res, next) {
-    res.status(200).sendFile(__dirname + '/Styles/index.js');
-});
 
 app.post('/submitJob', function(req, res) {
   DB.search("jobs", req.body).then((result) => {
