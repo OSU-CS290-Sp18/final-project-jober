@@ -32,6 +32,7 @@ app.get('/', function (req, res, next) {
       var promises = [];
       jobs.forEach((el) => {
         var IDList = el.comments;
+        if (!el.hasOwnProperty('comments')) IDList = [000000000000000000000000];
         promises.push(DB.getByIDList('comments', IDList));
       });
       Promise.all(promises).then((output) => {
@@ -80,7 +81,8 @@ app.get('/contract/:jobID', function(req, res, next) {
     console.log('jobID: ', jobID);
     DB.search("jobs", {_id: jobID} )
     .then((job) => {
-      console.log(job);
+      if (!job[0].hasOwnProperty('comments'))
+        job[0].comments = [000000000000000000000000];
       DB.getByIDList('comments', job[0].comments)
       .then((comments) => {
         job[0].comments = comments;
