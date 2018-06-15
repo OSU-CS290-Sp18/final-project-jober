@@ -2,27 +2,28 @@
 var postContainer = document.getElementsByClassName('post-container')[0];
 postContainer.addEventListener('click', handleContainerClick);
 
+var searchButton = document.getElementById("search-button");
+searchButton.addEventListener('click', handlePostSearch)
+
 var addJobStub = document.getElementById('add-post-stub');
-if (addJobStub) addJobStub.addEventListener('click',expandForm);
+addJobStub.addEventListener('click',expandForm);
 
 var addJobForm = document.getElementById('add-post-form');
 
 var addJobCloseButton = document.getElementById('add-post-close-button');
-if (addJobCloseButton) addJobCloseButton.addEventListener('click',closeForm);
+addJobCloseButton.addEventListener('click',closeForm);
 
 var submitPostButton = document.getElementById('submit-post-button');
-if (submitPostButton) submitPostButton.addEventListener('click',submitPost);
+submitPostButton.addEventListener('click',submitPost);
 
 var acceptOfferButton = document.getElementById('accept-offer-button');
 acceptOfferButton.addEventListener('click',acceptOffer);
 
+const JOB_URL_TEMPLATE = "\\contract\\";
 
-const JOB_URL_TEMPLATE = "\contract\\";
+function postContainsText(post, text) {
+  return post.innerText.search(text) >= 0;
 
-function submitPost(event){
-  console.log("submitPost");
-  handleModalAcceptClick();
-  closeForm();
 }
 
 function acceptOffer(event) {
@@ -56,6 +57,30 @@ function acceptOffer(event) {
     request.open("POST", "/acceptJob");
     request.setRequestHeader('Content-Type', 'application/json');
     request.send(acceptData);
+}
+
+function searchPosts(text) {
+  var posts = document.getElementsByClassName('post');
+  for( var i = 0; i < posts.length; i++) {
+    if(!postContainsText(posts[i], text)) {
+      posts[i--].remove();
+    }
+  }
+}
+
+function handlePostSearch(event) {
+  var postContainer = document.getElementsByClassName('job-container')[0];
+  if(postContainer) {
+    var searchText = document.getElementsByClassName('navbar-search-input')[0].value;
+    searchPosts(searchText);
+  }
+}
+
+
+function submitPost(event){
+  console.log("submitPost");
+  handleModalAcceptClick();
+  closeForm();
 }
 
 function generateContractURL(contract) {
