@@ -14,13 +14,6 @@ app.set('view engine', 'handlebars');
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-app.get('/style.css', function (req, res, next) {
-    res.status(200).sendFile(__dirname + '/public/style.css');
-});
-
-app.get('/index.js', function (req, res, next) {
-    res.status(200).sendFile(__dirname + '/public/index.js');
-});
 
 app.get('/', function (req, res, next) {
     // console.log(contractData);

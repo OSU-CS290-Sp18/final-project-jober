@@ -2,6 +2,9 @@
 var postContainer = document.getElementsByClassName('post-container')[0];
 postContainer.addEventListener('click', handleContainerClick);
 
+var searchButton = document.getElementById("search-button");
+searchButton.addEventListener('click', handlePostSearch)
+
 var addJobStub = document.getElementById('add-post-stub');
 addJobStub.addEventListener('click',expandForm);
 
@@ -13,7 +16,30 @@ addJobCloseButton.addEventListener('click',closeForm);
 var submitPostButton = document.getElementById('submit-post-button');
 submitPostButton.addEventListener('click',submitPost);
 
-const JOB_URL_TEMPLATE = "\contract\\";
+const JOB_URL_TEMPLATE = "\\contract\\";
+
+function postContainsText(post, text) {
+  return post.innerText.search(text) >= 0;
+
+}
+
+function searchPosts(text) {
+  var posts = document.getElementsByClassName('post');
+  for( var i = 0; i < posts.length; i++) {
+    if(!postContainsText(posts[i], text)) {
+      posts[i--].remove();
+    }
+  }
+}
+
+function handlePostSearch(event) {
+  var postContainer = document.getElementsByClassName('job-container')[0];
+  if(postContainer) {
+    var searchText = document.getElementsByClassName('navbar-search-input')[0].value;
+    searchPosts(searchText);
+  }
+}
+
 
 function submitPost(event){
   console.log("submitPost");
