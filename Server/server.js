@@ -22,22 +22,34 @@ app.get('/index.js', function (req, res, next) {
     res.status(200).sendFile(__dirname + '/public/index.js');
 });
 
+function insertComments(jobCardList) {
+  jobCardList.forEach((el) => {
+    var IDList = el.comments;
+    DB.search('comments', IDList).then((result) => {
+      el.comments = result;
+    });
+  }).then((stuff) => {
+    console.log(stuff);
+    return jobCardList;
+  });
+}
+
 app.get('/', function (req, res, next) {
-    // console.log(contractData);
-    // contractData.forEach((contract) => {
-    //   return DB.insertNew("jobs",contract)
-    //   .then((result) => {
-    //     console.log(result);
-    //   });
-    // });
-    var jobList = DB.search("jobs");
-    var contractorList = DB.search("contractors");
-    Promise.all([ jobList, contractorList ])
-    .then((lists) => {
-      console.log(lists);
-      res.status(200).render('homePage', {
-          contracts: lists[0],
-          // contractors: lists[1]
+    var jobList = DB.search("jobs").then((jobs) => {
+      var promises = [];
+      jobs.forEach((el) => {
+        var IDList = el.comments;
+        promises.push(DB.getByIDList('comments', IDList));
+      });
+      Promise.all(promises).then((output) => {
+        for (var i = 0; i < jobs.length; i++) {
+          jobs[i].comments = output[i];
+        }
+        return jobs;
+      }).then((jobs) => {
+        res.status(200).render('homePage', {
+            contracts: jobs,
+        });
       });
     });
 });
@@ -65,7 +77,6 @@ app.post('/submitJob', function(req, res) {
   });
 });
 
-
 app.get('/contract/:jobID', function(req, res, next) {
   var jobID = req.params.jobID;
   if(jobID == "index.js") {
@@ -73,15 +84,20 @@ app.get('/contract/:jobID', function(req, res, next) {
   } else if(jobID == "style.css") {
     res.status(200).sendFile(__dirname + '/public/style.css');
   } else {
-    console.log('jodID: ', jobID);
+    console.log('jobID: ', jobID);
     DB.search("jobs", {_id: jobID} )
     .then((job) => {
       console.log(job);
-     res.status(200).render('singlecontract', {
-        contracts: job
-     });
+      DB.getByIDList('comments', job[0].comments)
+      .then((comments) => {
+        job[0].comments = comments;
+        console.log(job);
+        res.status(200).render('singlecontract', {
+           contracts: job
+        });
+      });
     });
-  }
+  };
 });
 
 app.post('/removeJob/:jobID', function(req, res) {
@@ -99,11 +115,18 @@ app.post('/submitComment', function(req, res) {
     DB.insertNew('comments', req.body)
         .then((result) => {
           console.log("Inserted: ",result.ops);
-          return result.ops;
-      }).then((result) => {
-          var context = result[0];
+      //     return result.ops;
+      // }).then((result) => {
+          var context = result.ops[0];
           context.layout = false;
           res.status(200).render('partials/commentCard', context);
+          var queryObj = { _id: result.ops[0].contract_id };
+          var updateObj = {
+            $push: { comments: result.ops[0]._id }
+          };
+          DB.update('jobs', queryObj, updateObj).then((state) => {
+            console.log(state.result);
+          });
       }).catch((err) => {
           console.log("Error: ",err)
     });

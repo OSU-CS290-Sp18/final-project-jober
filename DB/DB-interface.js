@@ -85,6 +85,12 @@ function update(collection, queryObj, updateObj){
     MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
       if (err) throw err;
       var jober = db.db("jober");
+      if (queryObj.hasOwnProperty("_id")) {
+        queryObj._id = new ObjectId(queryObj._id);
+      }
+      if (updateObj.hasOwnProperty("_id")) {
+        updateObj._id = new ObjectId(updateObj._id);
+      }
       jober.collection(collection)
         .updateOne(queryObj,updateObj)
         .then((result,err) => {
