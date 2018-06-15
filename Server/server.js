@@ -34,11 +34,6 @@ app.get('/', function (req, res, next) {
     });
 });
 
-app.get('/contract/:j', function (req, res, next) {
-  var n = req.params.j;
-  console.log(n);
-});
-
 app.post('/submitJob', function(req, res) {
   DB.search("jobs", req.body).then((result) => {
     if (result.length == 0) {
