@@ -83,6 +83,7 @@ app.post('/removeJob/:jobID', function(req, res) {
   DB.removeByID('jobs', jobID)
     .then((result) => {
     console.log("Job removed!");
+    res.status(200).send();
   }).catch((err) => { if (err) console.log("Error: ",err)});
 });
 
