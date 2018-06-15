@@ -196,7 +196,7 @@ article.signin.post{
   max-height: 25px;
 }
 .close-post {
-  flex: 0 0 auto;
+  flex: 0 1 auto;
   float:right;
   border: 5px solid #ff0000;
   border-radius: 10px;
@@ -207,6 +207,7 @@ article.signin.post{
   color: #ffffff;
   font-size:20px;
   font-weight: bold;
+  min-height: 25px;
   max-height: 25px;
 }
 .post-content {
