@@ -63,7 +63,9 @@ function search(collection, queryObj={}, fieldsObj={}) {
       if (err) throw err;
       var jober = db.db("jober");
       if (queryObj.hasOwnProperty("_id")) {
-        queryObj._id = ObjectId(queryObj._id);
+        // console.log(queryObj._id+':'+typeof(queryObj._id));
+        // if (typeof(queryObj._id) !=)
+        queryObj._id = new ObjectId(queryObj._id);
       }
       jober.collection(collection)
         .find(queryObj)
