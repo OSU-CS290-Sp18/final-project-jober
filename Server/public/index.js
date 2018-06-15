@@ -1,5 +1,5 @@
 
-var postContainer = document.getElementsByClassName('post-container')[0]
+var postContainer = document.getElementsByClassName('job-container')[0];
 postContainer.addEventListener('click', handleContainerClick);
 
 var addJobStub = document.getElementById('add-post-stub');
@@ -13,6 +13,8 @@ addJobCloseButton.addEventListener('click',closeForm);
 var submitPostButton = document.getElementById('submit-post-button');
 submitPostButton.addEventListener('click',submitPost);
 
+const JOB_URL_TEMPLATE = "\\contract\\";
+
 function submitPost(event){
   console.log("submitPost");
   handleModalAcceptClick();
@@ -20,7 +22,12 @@ function submitPost(event){
 }
 
 function generateContractURL(contract) {
+  var RegExCrit = new RegExp('class="post" id="(.*)"');
+  var job_id =  RegExCrit.exec(contract)[1];
+  var job_url = JOB_URL_TEMPLATE + job_id;
+  var alertMessage = "Copy this URL for access to your job post -- >\n\n" + job_url;
 
+  alert(alertMessage);
 }
 
 
@@ -59,7 +66,8 @@ function handleModalAcceptClick() {
     request.onload = function () {
         if (request.readyState === request.DONE) {
             if (request.status === 200) {
-                postContainer.insertAdjacentHTML('beforeBegin',request.responseText);
+              generateContractURL(request.responseText);
+              postContainer.insertAdjacentHTML('afterBegin',request.responseText);
             }
             else {
               alert('Error! Job submittion failed!');

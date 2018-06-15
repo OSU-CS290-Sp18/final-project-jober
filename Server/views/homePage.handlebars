@@ -25,11 +25,13 @@
         </div>
     </article>
 
+    <div class="job-container" >
+        {{#each contracts}}
 
-    {{#each contracts}}
+            {{> contractCard}}
 
-        {{> contractCard}}
+        {{/each}}
+    </div>
 
-    {{/each}}
 
 </main>
