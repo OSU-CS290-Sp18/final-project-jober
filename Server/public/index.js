@@ -2,49 +2,60 @@
 var postContainer = document.getElementsByClassName('post-container')[0];
 postContainer.addEventListener('click', handleContainerClick);
 
-var searchButton = document.getElementById("search-button");
-searchButton.addEventListener('click', handlePostSearch)
-
 var addJobStub = document.getElementById('add-post-stub');
-addJobStub.addEventListener('click',expandForm);
+if (addJobStub) addJobStub.addEventListener('click',expandForm);
 
 var addJobForm = document.getElementById('add-post-form');
 
 var addJobCloseButton = document.getElementById('add-post-close-button');
-addJobCloseButton.addEventListener('click',closeForm);
+if (addJobCloseButton) addJobCloseButton.addEventListener('click',closeForm);
 
 var submitPostButton = document.getElementById('submit-post-button');
-submitPostButton.addEventListener('click',submitPost);
+if (submitPostButton) submitPostButton.addEventListener('click',submitPost);
 
-const JOB_URL_TEMPLATE = "\\contract\\";
+var acceptOfferButton = document.getElementById('accept-offer-button');
+acceptOfferButton.addEventListener('click',acceptOffer);
 
-function postContainsText(post, text) {
-  return post.innerText.search(text) >= 0;
 
-}
-
-function searchPosts(text) {
-  var posts = document.getElementsByClassName('post');
-  for( var i = 0; i < posts.length; i++) {
-    if(!postContainsText(posts[i], text)) {
-      posts[i--].remove();
-    }
-  }
-}
-
-function handlePostSearch(event) {
-  var postContainer = document.getElementsByClassName('job-container')[0];
-  if(postContainer) {
-    var searchText = document.getElementsByClassName('navbar-search-input')[0].value;
-    searchPosts(searchText);
-  }
-}
-
+const JOB_URL_TEMPLATE = "\contract\\";
 
 function submitPost(event){
   console.log("submitPost");
   handleModalAcceptClick();
   closeForm();
+}
+
+function acceptOffer(event) {
+  console.log('clicked');
+  var nameFrom = prompt("Please enter your name","John's Wayne");
+  var emailFrom = prompt("Please enter your email","jway@aol.com");
+  var message = prompt("Please enter message for contractor","Shakira");
+  var emailTo = prompt("Please enter contractor email","shakeit@boom.net");
+
+  // if (person == null || person == "") {
+  //     txt = "User cancelled the prompt.";
+  // } else {
+  //     txt = "Hello " + person + "! How are you today?";
+  // }
+
+    var acceptData = JSON.stringify({
+      nameFrom: nameFrom,
+      emailFrom: emailFrom,
+      message: message,
+      emailTo: emailTo
+    });
+    var request = new XMLHttpRequest();
+    // request.onload = function () {
+    //     if (request.readyState === request.DONE) {
+    //         if (request.status === 200) {
+    //           var commentContainer = event.target.parentNode.parentNode;
+    //           commentContainer.insertAdjacentHTML('beforeBegin',request.responseText);
+    //         }
+    //     }
+    // };
+    request.open("POST", "/acceptJob");
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.send(acceptData);
 }
 
 function generateContractURL(contract) {
@@ -176,7 +187,7 @@ function handleContainerClick(event) {
 
   if(event.target.classList.contains('create-response-button')) {
     addCommentEvent(event);
-    
+
   }
   if(event.target.classList.contains('close-post') ) {
     removePost(event);

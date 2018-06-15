@@ -109,7 +109,7 @@ app.post('/acceptJob', function(req, res) {
   var info = req.body;
   mailer.sendAccept(info.nameFrom,
     info.emailFrom,
-    info.nameTo,
+    info.message,
     info.emailTo);
 });
 
@@ -119,8 +119,6 @@ app.post('/submitComment', function(req, res) {
     DB.insertNew('comments', req.body)
         .then((result) => {
           console.log("Inserted: ",result.ops);
-      //     return result.ops;
-      // }).then((result) => {
           var context = result.ops[0];
           context.layout = false;
           res.status(200).render('partials/commentCard', context);

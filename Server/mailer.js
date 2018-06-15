@@ -6,8 +6,9 @@ const nodemailer = require('nodemailer');
 // Generate test SMTP service account from ethereal.email
 // Only needed if you don't have a real mail account for testing
 
-function sendAccept(nameFrom, emailFrom, nameTo, emailTo) {
+function sendAccept(nameFrom, emailFrom, message, emailTo) {
   nodemailer.createTestAccount((err, account) => {
+
       // create reusable transporter object using the default SMTP transport
       let transporter = nodemailer.createTransport({
           host: 'smtp.ethereal.email',
@@ -24,8 +25,8 @@ function sendAccept(nameFrom, emailFrom, nameTo, emailTo) {
           from: '"'+nameFrom+'" <'+emailFrom+'>', // sender address
           to: emailTo, // list of receivers
           subject: 'I have accepted your contract!', // Subject line
-          text: 'We should meet so I can pay you mondo bucks', // plain text body
-          html: '<b></b>' // html body
+          text: message, // plain text body
+          html: '<b>'+message+'</b>' // html body
       };
 
       // send mail with defined transport object
