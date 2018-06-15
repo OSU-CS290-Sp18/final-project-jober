@@ -14,6 +14,14 @@ app.set('view engine', 'handlebars');
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
+app.get('/style.css', function (req, res, next) {
+    res.status(200).sendFile(__dirname + '/public/style.css');
+});
+
+app.get('/index.js', function (req, res, next) {
+    res.status(200).sendFile(__dirname + '/public/index.js');
+});
+
 app.get('/', function (req, res, next) {
     // console.log(contractData);
     // contractData.forEach((contract) => {
@@ -57,7 +65,7 @@ app.post('/submitJob', function(req, res) {
   });
 });
 
-app.get('/contract/:jobID', function(req, res) {
+app.get('/contract/:jobID', function(req, res, next) {
   var jobID = req.params.jobID;
   if(jobID == "index.js") {
     res.status(200).sendFile(__dirname + '/public/index.js');
@@ -87,7 +95,6 @@ app.post('/removeJob/:jobID', function(req, res) {
 
 app.post('/submitComment', function(req, res) {
     console.log('Received Comment: ', req.body);
-
     console.log("Inserting...");
     DB.insertNew('comments', req.body)
         .then((result) => {
