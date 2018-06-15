@@ -30,7 +30,23 @@ app.get('/main', function (req, res, next) {
         contracts: contractData
     });
 });
-
+app.get('/j', function (req, res, next) {
+  var n = req.params.n;
+  n = 0;
+  console.log(n);
+  if (contractData[n]) {
+     res.status(200).render('singlecontract', {contracts: [contractData[n]]});
+  }
+  else{
+    next();
+  }
+});
+app.get('/j/style.css', function (req, res, next) {
+    res.status(200).sendFile(__dirname + '/Styles/style.css');
+});
+app.get('/j/index.js', function (req, res, next) {
+    res.status(200).sendFile(__dirname + '/Styles/index.js');
+});
 app.listen(port, function () {
     console.log("== Server listening on port", port);
 })

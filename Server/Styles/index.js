@@ -1,4 +1,3 @@
-
 var addJobStub = document.getElementById('add-post-stub');
 addJobStub.addEventListener('click',expandForm);
 

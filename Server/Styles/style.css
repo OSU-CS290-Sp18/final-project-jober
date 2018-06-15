@@ -195,14 +195,15 @@ article.signin.post{
   font-weight: bold;
   max-height: 25px;
 }
-.post-price {
+.close-post {
   flex: 0 0 auto;
   float:right;
-  border: 5px solid #00ff00;
+  border: 5px solid #ff0000;
   border-radius: 10px;
-  background-color: #04BB10;
+  background-color: #BB0410;
   padding: 5px;
   margin:0px;
+  margin-left: 5px;
   color: #ffffff;
   font-size:20px;
   font-weight: bold;
