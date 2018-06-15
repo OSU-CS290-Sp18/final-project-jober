@@ -198,10 +198,12 @@ article.signin.post{
 .close-post {
   flex: 0 1 auto;
   float:right;
-  border: 5px solid #ff0000;
+  border: 5px solid #AF2F00;
   border-radius: 10px;
-  background-color: #BB0410;
+  background-color: #FF7F50;
   padding: 5px;
+  padding-top: 7px;
+  padding-bottom: 28px;
   margin:0px;
   margin-left: 5px;
   color: #ffffff;
@@ -241,7 +243,7 @@ article.signin.post{
 }
 .comment-header {
   margin-top: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 3px;
   display:flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -274,17 +276,23 @@ article.signin.post{
   flex: 0 0 auto;
   display: inline-flex;
   float:right;
-  border: 5px solid #ff0000;
+  border: 5px solid #AF2F00;
   border-radius: 10px;
-  background-color: #BB0410;
+  background-color: #FF7F50;
   padding: 5px;
+  padding-bottom: 25px;
   margin:0px;
   margin-left: 5px;
+  margin-bottom: 5px;
   color: #ffffff;
   font-size:20px;
   font-weight: bold;
   min-height: 25px;
   max-height: 25px;
+}
+.accept-offer:focus {
+  text-decoration-color:
+  pointer:
 }
 
 .create-response {
