@@ -4,7 +4,7 @@ var express = require('express');
 var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var DB = require('./../DB/DB-interface');
-var contractData = require('./contractData');
+var mailer = require('./mailer');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -103,6 +103,14 @@ app.post('/removeJob/:jobID', function(req, res) {
     console.log("Job removed!");
     res.status(200).send();
   }).catch((err) => { if (err) console.log("Error: ",err)});
+});
+
+app.post('/acceptJob', function(req, res) {
+  var info = req.body;
+  mailer.sendAccept(info.nameFrom,
+    info.emailFrom,
+    info.nameTo,
+    info.emailTo);
 });
 
 app.post('/submitComment', function(req, res) {
