@@ -13,7 +13,7 @@ addJobCloseButton.addEventListener('click',closeForm);
 var submitPostButton = document.getElementById('submit-post-button');
 submitPostButton.addEventListener('click',submitPost);
 
-const JOB_URL_TEMPLATE = "\\contract\\";
+const JOB_URL_TEMPLATE = "\contract\\";
 
 function submitPost(event){
   console.log("submitPost");
@@ -28,6 +28,7 @@ function generateContractURL(contract) {
   var alertMessage = "Copy this URL for access to your job post -- >\n\n" + job_url;
 
   alert(alertMessage);
+  location.href = job_url;
 }
 
 
@@ -122,7 +123,7 @@ function addCommentEvent(event) {
     request.open("POST", "/submitComment");
     request.setRequestHeader('Content-Type', 'application/json');
     request.send(commentData);
-    clearAllJobRequestText();
+    commentTextBox.value = '';
   } else {
     alert("Comment must have a body!");
   }
