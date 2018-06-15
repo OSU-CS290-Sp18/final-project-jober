@@ -23,6 +23,7 @@ var getByIDList = function(collection, IDlist=[], fieldsObj={}) {
         var jober = db.db("jober");
         jober.collection(collection)
           .find(query)
+          .sort({'_id': -1})
           .project(fieldsObj)
           .toArray((err, result) => {
             if (err) throw err;
@@ -39,17 +40,17 @@ function insertNew(collection, record) {
     MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
       if (err) reject(err);
       var jober = db.db("jober");
-      jober.createCollection(collection, function(err, res) {
-        if (err) reject(err);
-        console.log("Collection "+collection+" created!");
-        db.close();
-      });
-      record.timestamp = new Date().getTime();
+      var date = new Date();
+      record.timestamp =
+        date.getHours()+':'+date.getMinutes()+', '+date.toDateString();
+      console.log(record.timestamp);
       jober.collection(collection)
         .insertOne(record)
-        .then((err, result) => {
-          if (err) reject(err);
+        .then((result, err) => {
+          // console.log("Error: insertNew: ",err);
+          // console.log("Result: insertNew: ",result);
           db.close();
+          if (err) reject(err);
           resolve(result);
       });
     });
@@ -61,13 +62,16 @@ function search(collection, queryObj={}, fieldsObj={}) {
     MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
       if (err) throw err;
       var jober = db.db("jober");
+      if (queryObj.hasOwnProperty("_id")) {
+        queryObj._id = ObjectId(queryObj._id);
+      }
       jober.collection(collection)
         .find(queryObj)
+        .sort({'_id': -1})
         .project(fieldsObj)
         .toArray((err, result) => {
-          if (err) throw err;
-          // if (result) result.next();
           db.close();
+          if (err) reject(err);
           resolve(result);
       });
     });
@@ -84,16 +88,32 @@ function update(collection, queryObj, updateObj){
         .then((result,err) => {
           db.close();
           if (err) reject(err)
-          else resolve(result);
+          resolve(result);
       });
     });
   });
 }
 
+function removeByID(collection, deleteMe) {
+  return new Promise((resolve, reject) => {
+    MongoClient.connect(url, {useNewUrlParser: true}, function(err, db) {
+      if (err) throw err;
+      var jober = db.db("jober");
+      jober.collection(collection)
+        .remove({ _id: ObjectId(deleteMe) })
+        .then((result,err) => {
+          db.close();
+          if (err) reject(err)
+          resolve(result);
+      });
+    });
+  });
+}
 
 module.exports = {
   getByIDList: getByIDList,
   insertNew: insertNew,
   search: search,
   update: update,
+  removeByID: removeByID,
 }

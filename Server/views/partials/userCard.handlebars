@@ -1,0 +1,15 @@
+<article>
+   <div>
+      <p>{{username}}</p>
+      <div>
+         {{#each skills}}
+            {{> skillCard}}
+         {{/each}}
+      </div>
+
+      {{#if largeFormat}}
+      <div>{{description}}</div>
+      {{/if}}
+
+   </div>
+</article>
