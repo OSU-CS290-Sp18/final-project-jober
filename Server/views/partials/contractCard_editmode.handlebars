@@ -1,0 +1,25 @@
+<article class="post">
+    <div class="post-header">
+        <h2 class="post-title">{{title}}</h2>
+        <p class="post-price">{{price}}</p>
+        <p class="close-post">END</p>
+    </div>
+    <div class="post-content">
+        <p class="post-timestamp">{{timestamp}}</p>
+        <p class="post-description">{{description}}</p>
+        <p class="post-author">
+            <a href="#">{{author}}</a>
+        </p>
+    </div>
+    <div class="post-responses">
+
+        {{#each comments}}
+            {{> commentCard}}
+        {{/each}}
+
+        <div class="create-response">
+            <textarea type="text" class="create-response-input" placeholder="reply here..." maxlength="400"></textarea>
+            <button type="button" class="create-response-button action-button"><i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+</article>
