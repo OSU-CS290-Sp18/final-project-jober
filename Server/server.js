@@ -59,13 +59,20 @@ app.post('/submitJob', function(req, res) {
 
 app.get('/contract/:jobID', function(req, res) {
   var jobID = req.params.jobID;
-  DB.search("jobs", {_id: jobID} )
+  if(jobID == "index.js") {
+    res.status(200).sendFile(__dirname + '/public/index.js');
+  } else if(jobID == "style.css") {
+    res.status(200).sendFile(__dirname + '/public/style.css');
+  } else {  
+    console.log('jodID: ', jobID);   
+    DB.search("jobs", {_id: jobID} )
     .then((job) => {
-    console.log(job);
-    // res.status(200).render('homePage', {
-    //     contracts: lists[0],
-    // });
-  });
+      console.log(job);
+     res.status(200).render('singlecontract', {
+        contracts: job
+     });
+    });
+  }
 });
 
 app.post('/removeJob/:jobID', function(req, res) {
@@ -74,6 +81,7 @@ app.post('/removeJob/:jobID', function(req, res) {
   DB.removeByID('jobs', jobID)
     .then((result) => {
     console.log("Job removed!");
+    res.status(200).send();
   }).catch((err) => { if (err) console.log("Error: ",err)});
 });
 

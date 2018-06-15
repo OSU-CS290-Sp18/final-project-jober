@@ -1,5 +1,5 @@
 
-var postContainer = document.getElementsByClassName('job-container')[0];
+var postContainer = document.getElementsByClassName('post-container')[0];
 postContainer.addEventListener('click', handleContainerClick);
 
 var addJobStub = document.getElementById('add-post-stub');
@@ -105,7 +105,6 @@ function getContractID(event) {
 function addCommentEvent(event) {
   var commentTextBox = event.target.parentNode.getElementsByClassName('create-response-input')[0];
   if(commentTextBox.value) {
-
     getContractID(event);
     var commentData = JSON.stringify({
       text: commentTextBox.value,
@@ -127,7 +126,24 @@ function addCommentEvent(event) {
   } else {
     alert("Comment must have a body!");
   }
+}
 
+function removePost(event) {
+  var job = event.target.parentNode.parentNode;
+  var jobID = job.id;
+  var request = new XMLHttpRequest();
+  request.onload = function () {
+    if(request.readyState === request.DONE) {
+      if( request.status === 200 ){
+        alert("Job Removed!");
+        location.href = '/';
+      }
+    }
+  };
+  var url = /removeJob/ + jobID;
+  request.open('POST', url);
+  request.setRequestHeader('Content-Type', 'application/json');
+  request.send();
 }
 
 function handleContainerClick(event) {
@@ -135,6 +151,9 @@ function handleContainerClick(event) {
   if(event.target.classList.contains('create-response-button')) {
     addCommentEvent(event);
     
+  }
+  if(event.target.classList.contains('close-post') ) {
+    removePost(event);
   }
 
 }
