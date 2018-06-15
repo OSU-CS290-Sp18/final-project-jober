@@ -57,6 +57,17 @@ app.post('/submitJob', function(req, res) {
   });
 });
 
+app.get('/contract/:jobID', function(req, res) {
+  var jobID = req.params.jobID;
+  DB.search("jobs", {_id: jobID} )
+    .then((job) => {
+    console.log(job);
+    // res.status(200).render('homePage', {
+    //     contracts: lists[0],
+    // });
+  });
+});
+
 app.post('/removeJob/:jobID', function(req, res) {
   console.log("Removing job...");
   var jobID = req.params.jobID;
@@ -66,7 +77,7 @@ app.post('/removeJob/:jobID', function(req, res) {
   }).catch((err) => { if (err) console.log("Error: ",err)});
 });
 
-app.get('/submitComment', function(req, res) {
+app.post('/submitComment', function(req, res) {
     console.log('Received Comment: ', req.body);
 
     console.log("Inserting...");
