@@ -195,7 +195,23 @@ article.signin.post{
   font-weight: bold;
   max-height: 25px;
 }
-
+.close-post {
+  flex: 0 1 auto;
+  float:right;
+  border: 5px solid #AF2F00;
+  border-radius: 10px;
+  background-color: #FF7F50;
+  padding: 5px;
+  padding-top: 7px;
+  padding-bottom: 28px;
+  margin:0px;
+  margin-left: 5px;
+  color: #ffffff;
+  font-size:20px;
+  font-weight: bold;
+  min-height: 25px;
+  max-height: 25px;
+}
 .post-content {
   padding: 0px 20px 5px 20px;
 }
@@ -227,7 +243,7 @@ article.signin.post{
 }
 .comment-header {
   margin-top: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 3px;
   display:flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -244,9 +260,39 @@ article.signin.post{
   font-size: 12px;
   float: right;
 }
+.comment-desc-cont {
+  display:flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
 .comment-text {
+  flex: 1 1 auto;
+  word-wrap: normal;
+  display: inline-flex;
   margin-top: 8px;
   margin-bottom: 8px;
+}
+.accept-offer {
+  flex: 0 0 auto;
+  display: inline-flex;
+  float:right;
+  border: 5px solid #AF2F00;
+  border-radius: 10px;
+  background-color: #FF7F50;
+  padding: 5px;
+  padding-bottom: 25px;
+  margin:0px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  color: #ffffff;
+  font-size:20px;
+  font-weight: bold;
+  min-height: 25px;
+  max-height: 25px;
+}
+.accept-offer:focus {
+  text-decoration-color:
+  pointer:
 }
 
 .create-response {
